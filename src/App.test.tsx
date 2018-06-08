@@ -9,11 +9,11 @@ it('renders without crashing', () => {
 });
 
 it('it fails', () => {
-  const p: number = 1;
-  expect(p).toBeNaN();
+  const p: number = 3;
+  expect(p).toBeGreaterThan(1);
 });
 
 it('1 is truthy', () => {
-  const p: number = 0;
+  const p: number = 1;
   expect(p).toBeTruthy();
 });

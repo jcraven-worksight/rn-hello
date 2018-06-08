@@ -23,16 +23,13 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest",
+
+    "test": "jest --watch",
     "lint": "tslint src/**/*.ts",
     "tsc": "tsc",
     "clean": "rimraf build",
     "build": "yarn run clean && yarn run tsc --",
     "watch": "yarn run build -- -w",
-    "watchAndRunAndroid": "concurrently \"yarn run watch\" \"yarn run android\"",
-    "buildRunAndroid": "yarn run build && yarn run watchAndRunAndroid ",
-    "watchAndRunIOS": "concurrently \"yarn run watch\" \"yarn run ios\"",
-    "buildRunIOS": "yarn run build && yarn run watchAndRunIOS ",
     "watchAndStart": "concurrently \"yarn run watch\" \"yarn run start\"",
     "bs": "yarn run build && yarn run watchAndStart "
   },

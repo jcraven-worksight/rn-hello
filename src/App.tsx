@@ -20,7 +20,6 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text style={styles.text}>on your app!</Text>
         <Text style={styles.text}>{person.name} testicles fly</Text>
-        <Text style={styles.text}>somxe random errors</Text>
       </View>
     );
   }
