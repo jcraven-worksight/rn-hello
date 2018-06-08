@@ -2,6 +2,7 @@
 
 # expo
 .expo/
+/build
 
 # dependencies
 /node_modules
@@ -17,3 +18,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode/.react/
+
+.jest
