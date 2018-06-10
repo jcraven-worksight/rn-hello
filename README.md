@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 ### how to debug (so far)
 * `expo whoami` make sure you're logged in before starting debugger. _not sure if this is necessary?_
-* test running and typescript compiling: run `tsc --watch` and `yarn run test` in separate console windows.
+* test running and typescript compiling: run `yarn run watch` and `yarn run test` in separate console windows.
 * start debugging in vscode. 
 
 ### storybook
