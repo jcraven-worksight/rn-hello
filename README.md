@@ -23,3 +23,8 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 ### alternative debug setup, no vscode but can use browser:
 * `npm run bs` start without vs code debugging, not sure how to get this running from vscode debug
+* from there, shake in expo to launch external debugger in browser
+
+### ISSUES
+* react-native doesn't support proxies in android, and rewire-core uses s-js which needs proxies. 
+There is a polyfill available `proxy-polyfill`, but how can I get a dependency to use that... When debugging remotely you don't see this issue because the code is executed in development machine's Chrome V8, but when not debugging it executes in JavaScriptCore on the device itself [more info](https://stackoverflow.com/questions/41874676/react-native-code-doesnt-work-without-remote-debugger-enabled)
