@@ -18,8 +18,8 @@ export default class App extends React.Component {
     const person: Person = this.doSomeStuff();
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>on your app!</Text>
-        <Text style={styles.text}>{person.name} testicles fly</Text>
+        <Text style={styles.text}>yo pp!</Text>
+        <Text style={styles.text}>{person.name} is flying!</Text>
       </View>
     );
   }

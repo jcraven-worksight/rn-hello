@@ -22,6 +22,7 @@
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
+    "android-watch": "concurrently \"yarn run watch\" \"yarn run android\"",
     "ios": "react-native-scripts ios",
 
     "test": "jest --watch",
