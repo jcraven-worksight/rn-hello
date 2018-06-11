@@ -24,7 +24,6 @@
     "android": "react-native-scripts android",
     "android-watch": "concurrently \"yarn run watch\" \"yarn run android\"",
     "ios": "react-native-scripts ios",
-
     "test": "jest --watch",
     "lint": "tslint src/**/*.ts",
     "tsc": "tsc",
@@ -40,6 +39,7 @@
   "dependencies": {
     "expo": "^27.0.1",
     "react": "16.3.1",
-    "react-native": "~0.55.2"
+    "react-native": "~0.55.2",
+    "rewire-core": "^1.0.0-beta.12"
   }
 }
