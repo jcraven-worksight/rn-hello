@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import {TouchableHighlight, StyleSheet, View, Button, TextInput } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
 
-export default class Login extends Component<INavigationProps, any> {
+export default class LoginScreen extends Component<INavigationProps, any> {
+  static navigationOptions = {
+    title: 'Home'
+  };
+
   inputs: any;
   constructor(props: INavigationProps) {
     super(props);
-    this.state = { email: '', password: '' };
-    const pwToMatch = 'password';
+    this.state = { email: 'temp@temp.temp', password: 'p' };
     this.focusNextField = this.focusNextField.bind(this);
     this.inputs = {};
   }
@@ -18,6 +21,11 @@ export default class Login extends Component<INavigationProps, any> {
 
   login() {
     console.log(`logging in with email: ${this.state.email}, pw ${this.state.password}`);
+    if (this.state.password === 'p') {
+      this.props.navigation.navigate('Home', { email: this.state.email, name: 'bob man', job: 'carpenter' });
+    } else {
+      alert('wrong password');
+    }
   }
 
   render() {

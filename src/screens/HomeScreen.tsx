@@ -1,25 +1,33 @@
-import Person from '../models/Person';
+import {Person, IPerson} from '../models/Person';
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import INavigationProps from '../config/INavigationProps';
 
-export default class Home extends React.Component<INavigationProps, any> {
-  public employee: any;
+interface IHomeProps extends INavigationProps, IPerson {
+}
 
-  constructor(props: INavigationProps) {
+export default class Home extends React.Component<IHomeProps, any> {
+  static navigationOptions = {
+    title: 'Home'
+  };
+  public employee: Person;
+
+  constructor(props: any) {
     super(props);
-    this.employee = new Person('bob', 33, 'carpenter');
+    const nav = this.props.navigation;
+    this.employee = new Person(nav.getParam('name', 'some dude'), nav.getParam('job', 'hobo'), nav.getParam('email', 'none'));
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const {navigate, goBack} = this.props.navigation;
     return (
         <View style={styles.container}>
-          <Text style={styles.text}>{this.employee.name} is my friend</Text>
-          <Text style={styles.text}>he is {this.employee.age} year's old</Text>
-          <Text style={styles.text}>and works as a {this.employee.job}</Text>
-          <Button title='Go to login' onPress={() => navigate('Login', {})}
-        />
+          <Text style={styles.text}>Welcome {this.employee.name}</Text>
+          <Text style={styles.text}>Your email address is {this.employee.email}</Text>
+          <Text style={styles.text}>Your Job title is {this.employee.job}</Text>
+          <Button title='Go to empty' onPress={() => navigate('Empty', {})}/>
+          <Text/>
+          <Button title='Logout' onPress={() => goBack()}/>
         </View>
     );
   }
@@ -29,12 +37,15 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 30
+    fontSize: 25
   },
   container: {
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  button: {
+    marginHorizontal: 20
   }
 });
