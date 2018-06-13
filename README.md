@@ -41,3 +41,6 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 There is a polyfill available `proxy-polyfill`, but how can I get a dependency to use that... When debugging remotely you don't see this issue because the code is executed in development machine's Chrome V8, but when not debugging it executes in JavaScriptCore on the device itself [more info](https://stackoverflow.com/questions/41874676/react-native-code-doesnt-work-without-remote-debugger-enabled)
 * __react-navigation:__ doesn't support [dynamic routing](https://reactnavigation.org/docs/en/limitations.html).
    * unable to get get header titles displaying 
+
+### I'm really smrt
+* if db is running locally expo can't find it on localhost.xxxx, need to specify machine ip 

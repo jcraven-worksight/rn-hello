@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {TouchableHighlight, StyleSheet, View, Button, TextInput } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
+import {client} from '../App';
+import {query1, query2} from '../gql/testQueries';
 
 export default class LoginScreen extends Component<INavigationProps, any> {
   static navigationOptions = {
@@ -13,6 +15,15 @@ export default class LoginScreen extends Component<INavigationProps, any> {
     this.state = { email: 'temp@temp.temp', password: 'p' };
     this.focusNextField = this.focusNextField.bind(this);
     this.inputs = {};
+    this.testQuery();
+  }
+
+  testQuery() {
+    client.query({ query: query1, variables: {type: 'airport', numOfAirports: 3}}).then(result => {
+      const data: any = result.data;
+      const aps = data.searchType;
+      console.log(aps[0]);
+    });
   }
 
   focusNextField(id: string) {

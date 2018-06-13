@@ -2,12 +2,20 @@ import React from 'react';
 import Home from './screens/HomeScreen';
 import Login from './screens/LoginScreen';
 import Empty from './screens/EmptyScreen';
+
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import {merge} from 'lodash';
 
+import {ApolloProvider} from 'react-apollo';
+import ApolloClient from 'apollo-boost';
+import {gqlEndPoint} from './config/config';
+
+export const client = new ApolloClient({
+  uri: gqlEndPoint
+});
+
 // dont show this warning...only appearing with react-navigation
 import { YellowBox } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated']);
 
 const MainScreens = {
@@ -27,7 +35,6 @@ const LoginScreens = {
 };
 
 const RootStackNavigator = createStackNavigator(
-  // LoginScreens,
   merge(LoginScreens, MainScreens),
   {
     initialRouteName: 'Login'
@@ -36,20 +43,10 @@ const RootStackNavigator = createStackNavigator(
 
 const MainTab = createBottomTabNavigator(
   MainScreens
-  // {
-  //   initialRouteName: 'Login'
-  // }
-  // navigationOptions: ({navigation}) => ({
-  //   tabBarIcon: ({ focused, tintColor }) => {
-  //     const {routeName} = navigation.state;
-  //     return null;
-  //   }
-  //  })
 );
 
 export default class App extends React.Component {
   render() {
-    // return <MainTab/>;
     return <RootStackNavigator />;
   }
 }
