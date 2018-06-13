@@ -5,6 +5,11 @@ export interface IPerson {
   email: string;
 }
 
+export class PersonSmall {
+  name: string;
+  age: number;
+}
+
 export class Person implements IPerson {
   name: string;
   age: number;

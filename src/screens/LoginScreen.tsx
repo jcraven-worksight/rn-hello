@@ -15,7 +15,7 @@ export default class LoginScreen extends Component<INavigationProps, any> {
     this.state = { email: 'temp@temp.temp', password: 'p' };
     this.focusNextField = this.focusNextField.bind(this);
     this.inputs = {};
-    this.testQuery();
+    // this.testQuery();
   }
 
   testQuery() {
@@ -31,7 +31,7 @@ export default class LoginScreen extends Component<INavigationProps, any> {
   }
 
   login() {
-    console.log(`logging in with email: ${this.state.email}, pw ${this.state.password}`);
+    // console.log(`logging in with email: ${this.state.email}, pw ${this.state.password}`);
     if (this.state.password === 'p') {
       this.props.navigation.navigate('Home', { email: this.state.email, name: 'bob man', job: 'carpenter' });
     } else {

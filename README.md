@@ -23,6 +23,8 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * sometimes you need to spam save to trigger hot reload.
 * if the phone screen turns off, usually need to reconnect in expo
 * when debugging in vscode, make sure exponent gui app isn't running on development machine
+* if you start seeing the blue screen in expo about the packager not running...check the ips are matching or scan a new qr code. 
+* you should see this line in the debug console if vscode attached: Debugger worker loaded runtime on port XXXXX
 
 ### android emulator
 * install android studio

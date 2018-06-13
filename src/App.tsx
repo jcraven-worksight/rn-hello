@@ -6,7 +6,7 @@ import Empty from './screens/EmptyScreen';
 import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import {merge} from 'lodash';
 
-import {ApolloProvider} from 'react-apollo';
+import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import {gqlEndPoint} from './config/config';
 
@@ -47,6 +47,10 @@ const MainTab = createBottomTabNavigator(
 
 export default class App extends React.Component {
   render() {
-    return <RootStackNavigator />;
+    return (
+      <ApolloProvider client={client}>
+        <RootStackNavigator />
+      </ApolloProvider>
+    );
   }
 }
