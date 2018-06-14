@@ -1,7 +1,9 @@
-import {Person, IPerson} from '../models/Person';
+import { Person, IPerson } from '../models/Person';
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import { Text, View, Button } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Container} from '../components/Container';
 
 interface IHomeProps extends INavigationProps, IPerson {
 }
@@ -21,29 +23,22 @@ export default class Home extends React.Component<IHomeProps, any> {
   render() {
     const {navigate, goBack} = this.props.navigation;
     return (
-        <View style={styles.container}>
-          <Text style={styles.text}>Welcome {this.employee.name}</Text>
-          <Text style={styles.text}>Your email address is {this.employee.email}</Text>
-          <Text style={styles.text}>Your Job title is {this.employee.job}</Text>
-          <Button title='Go to empty' onPress={() => navigate('Empty', {})}/>
-          <Text/>
+        <Container>
+          <Text style={styles.text}>welcome {this.employee.name}</Text>
+          <Text style={styles.text}>email: {this.employee.email}</Text>
+          <Text style={styles.text}>job: {this.employee.job}</Text>
+          <Button title='Go' onPress={() => navigate('Empty', {})}/>
           <Button title='Logout' onPress={() => goBack()}/>
-        </View>
+        </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   text: {
-    color: '#fff',
+    color: '$white',
     fontWeight: 'bold',
     fontSize: 25
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   button: {
     marginHorizontal: 20

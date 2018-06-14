@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
-import {TouchableHighlight, StyleSheet, View, Button, TextInput } from 'react-native';
+import {Text, TouchableHighlight, Button, TextInput } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
 import {client} from '../App';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {query1, query2} from '../gql/testQueries';
+import {Container} from '../components/Container';
 
-export default class LoginScreen extends Component<INavigationProps, any> {
-  static navigationOptions = {
-    title: 'Home'
-  };
+interface Props extends INavigationProps {
+  email: string;
+  password: string;
+  ooga: string;
+}
 
+interface State {
+  title: string;
+  email: string;
+  password: string;
+}
+
+export default class LoginScreen extends Component<Props, State> {
   inputs: any;
-  constructor(props: INavigationProps) {
+
+  constructor(props: Props) {
     super(props);
-    this.state = { email: 'temp@temp.temp', password: 'p' };
     this.focusNextField = this.focusNextField.bind(this);
     this.inputs = {};
+    this.state = {
+      email: props.email || 'temp@temp.temp',
+      password: props.password || 'p',
+      title: 'hello, login here'
+    };
+
     // this.testQuery();
   }
 
@@ -31,7 +47,6 @@ export default class LoginScreen extends Component<INavigationProps, any> {
   }
 
   login() {
-    // console.log(`logging in with email: ${this.state.email}, pw ${this.state.password}`);
     if (this.state.password === 'p') {
       this.props.navigation.navigate('Home', { email: this.state.email, name: 'bob man', job: 'carpenter' });
     } else {
@@ -41,13 +56,14 @@ export default class LoginScreen extends Component<INavigationProps, any> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
+        <Text style={[styles.text, {marginBottom: 15}]}>{this.state.title}</Text>
         <TextInput
           style={styles.input}
           onChangeText={(email) => this.setState({email})}
-          value={this.state.text}
+          // value={this.state.text}
           placeholder='email'
-          autoFocus={true}
+          autoFocus={false}
           keyboardType='email-address'
           blurOnSubmit={false}
           returnKeyType={'next'}
@@ -61,41 +77,34 @@ export default class LoginScreen extends Component<INavigationProps, any> {
         <TextInput
           style={styles.input}
           onChangeText={(password) => this.setState({password})}
-          value={this.state.text}
+          // value={this.state.text}
           placeholder='password'
           ref={ input => {
             this.inputs.two = input;
           }}
         />
         <TouchableHighlight>
-        <Button
-          onPress={this.login.bind(this)}
-          title='Submit'
-          color='#841584'
-        />
+          <Button
+            onPress={this.login.bind(this)}
+            title='Login'
+            color='#841584'
+          />
         </TouchableHighlight>
-      </View>
+      </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
+  text: {
+    color: '$white',
+    fontWeight: 'bold',
+    fontSize: 25
+  },
   input: {
     height: 40,
     width: 200,
-    borderColor: 'gray',
-    borderWidth: 1,
     marginHorizontal: 20,
     marginBottom: 20
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonTouched: {
-    borderColor: 'red',
-    borderWidth: 2
   }
 });
