@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {Text, TouchableHighlight, Button, TextInput } from 'react-native';
+import { Text, TextInput } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
-import {client} from '../App';
+import { client } from '../App';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {query1, query2} from '../gql/testQueries';
-import {Container} from '../components/Container';
+import { query1, findAirportsQuery } from '../gql/testQueries';
+import { Container } from '../components/Container';
+import { NiceButton } from '../components/Button';
 
 interface Props extends INavigationProps {
   email: string;
@@ -30,12 +31,12 @@ export default class LoginScreen extends Component<Props, State> {
       password: props.password || 'p',
       title: 'hello, login here'
     };
-
     // this.testQuery();
   }
 
   testQuery() {
-    client.query({ query: query1, variables: {type: 'airport', numOfAirports: 3}}).then(result => {
+    // client.query({ query: query1, variables: {type: 'airport', numOfAirports: 3}}).then(result => {
+    client.query({ query: findAirportsQuery, variables: {search: 'Seattle'}}).then(result => {
       const data: any = result.data;
       const aps = data.searchType;
       console.log(aps[0]);
@@ -83,13 +84,7 @@ export default class LoginScreen extends Component<Props, State> {
             this.inputs.two = input;
           }}
         />
-        <TouchableHighlight>
-          <Button
-            onPress={this.login.bind(this)}
-            title='Login'
-            color='#841584'
-          />
-        </TouchableHighlight>
+          <NiceButton onTouch={this.login.bind(this)} title='Login' />
       </Container>
     );
   }
@@ -104,6 +99,8 @@ const styles = EStyleSheet.create({
   input: {
     height: 40,
     width: 200,
+    borderWidth: 1,
+    borderColor: '$inputText',
     marginHorizontal: 20,
     marginBottom: 20
   }

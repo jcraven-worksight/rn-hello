@@ -1,30 +1,28 @@
-import { View, Text, Button } from 'react-native';
+import { Text } from 'react-native';
 import React from 'react';
-import  { LoadingIndicator }  from '../components/LoadingIndicator';
+import { LoadingIndicator } from '../components/LoadingIndicator';
+import { Container } from '../components/Container';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { Query } from 'react-apollo';
+import { query1, query2 } from '../gql/testQueries';
+import { PersonSmall } from '../models/Person';
 
-import {Query} from 'react-apollo';
-import {query1, query2} from '../gql/testQueries';
-import {PersonSmall} from '../models/Person';
-
-class What extends React.Component<any, any> {
-  render() {
-    return <Text>hello world </Text>;
-  }
-}
+const logme = () => alert('im pressed!');
+import styles from '../components/Container/styles';
 
 // bracket nesting is a bit nuts...
 export default (/* onLoginSelected: any */) => (
   <Query query={query2}>
     {({ loading, error, data }) => {
       if (loading) return <LoadingIndicator />;
-      if (error) return <Text>Error...</Text>;
+      if (error) return <Text style={styles.text}>Error...</Text>;
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Container>
           {data.test.map((person: PersonSmall, idx: number) => (
-            <Text key={idx}>{person.name} is {person.age} years old</Text>
+            <Text style={styles.text} key={idx}>{person.name} is {person.age} years old</Text>
           ))}
           {/* <Button title='press me' onPress={onLoginSelected}/> */}
-        </View>
+        </Container>
       );
     }}
   </Query>

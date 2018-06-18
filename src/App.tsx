@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Empty from './screens/Empty';
+import FindAirport from './screens/FindAirports';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { merge } from 'lodash';
@@ -28,6 +29,9 @@ EStyleSheet.build({
 });
 
 const MainScreens = {
+  FindAirport: {
+    screen: (props: any) => <FindAirport {...props} />
+  },
   Empty: {
     screen: (props: any) => <Empty {...props} />
     // screen: Object.assign(Empty, navigationOptions)
@@ -46,7 +50,8 @@ const LoginScreens = {
 const RootStackNavigator = createStackNavigator(
   merge(LoginScreens, MainScreens),
   {
-    initialRouteName: 'Login'
+    // initialRouteName: 'Login'
+    initialRouteName: 'FindAirport'
   }
 );
 

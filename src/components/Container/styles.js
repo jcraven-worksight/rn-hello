@@ -6,5 +6,9 @@ export default EStyleSheet.create({
     backgroundColor: '$darkText',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  text: {
+    color: '$white',
+    fontSize: 15
   }
 });
