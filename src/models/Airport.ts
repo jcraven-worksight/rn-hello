@@ -1,6 +1,6 @@
 import GeoLocation from './GeoLocation';
 
-interface IAirportJSON {
+export interface IAirportJSON {
   airportname: string;
   city: string;
   country: string;
@@ -11,7 +11,7 @@ interface IAirportJSON {
   tz: string;
 }
 
-export default class Airport /* implements ITravelSampleType */ {
+export class Airport {
   public airportname: string;
   public city: string;
   public country: string;

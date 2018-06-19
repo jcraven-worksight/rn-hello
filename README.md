@@ -15,16 +15,16 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * start debugging in vscode. 
    * `npm run bs` an alternative way to start without vs code debugging, not currently working with native-tools debugger in vscode
 
-### storybook - used for testing components
+### storybook
 * install storybook `yarn install global storybook`
 * `yarn run storybook`
 
 ### odd issues I've encountered:
-* sometimes you need to spam save to trigger hot reload.
-* if the phone screen turns off, usually need to reconnect in expo
 * when debugging in vscode, make sure exponent gui app isn't running on development machine
-* if you start seeing the blue screen in expo about the packager not running...check the ips are matching or scan a new qr code. 
-* you should see this line in the debug console if vscode attached: Debugger worker loaded runtime on port XXXXX
+* if you start seeing the blue screen in expo about the packager not running, check dhcp lease on ip didn't expire.
+* if working correctly, you should see this line in the debug console if vscode attached: Debugger worker loaded runtime on port x
+* if db is running locally, specify machine ip
+* if you start seeing error messages about not being able to find files, reinstall react-native tools
 
 ### android emulator
 * install android studio
@@ -36,14 +36,20 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * `npm run android-watch`
 * console logging to terminal, run `react-native log-android | grep ReactNativeJS`.
 * can right click in emulator with `ctrl+m` and launch external debugger.
-* haven't been able to get the vscode debugger attaching :(
+* haven't been able to get the vscode debugger attaching
 
-### _Issues/Considerations_
+### Issues/Considerations
 * __react-native__ doesn't support proxies in android, and rewire-core uses them. 
-There is a polyfill available `proxy-polyfill`, but how can I get a dependency to use that... When debugging remotely you don't see this issue because the code is executed in development machine's Chrome V8, but when not debugging it executes in JavaScriptCore on the device itself [more info](https://stackoverflow.com/questions/41874676/react-native-code-doesnt-work-without-remote-debugger-enabled)
+There is a polyfill available `proxy-polyfill`. When debugging remotely you don't see this issue because the code is executed in development machine's Chrome V8, but when not debugging it executes in JavaScriptCore on the device itself [more info](https://stackoverflow.com/questions/41874676/react-native-code-doesnt-work-without-remote-debugger-enabled)
+* have tried implementing the proxy polyfill in my fork of rewire-core, but no luck.
 * __react-navigation:__ doesn't support [dynamic routing](https://reactnavigation.org/docs/en/limitations.html).
    * unable to get get header titles displaying 
 * debounce?
 
-### I'm really smrt
-* if db is running locally expo can't find it on localhost.xxxx, need to specify machine ip 
+### component list...
+* input with autocomplete
+* touchable list
+* form
+* date picker (RN has platform specific components for this)
+* table (ex balances for holiday types etc)
+* timecard???

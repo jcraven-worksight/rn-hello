@@ -1,53 +1,38 @@
-import React, { Component } from 'react';
-import {FlatList, Text} from 'react-native';
+import React from 'react';
+import { FlatList, Text } from 'react-native';
 import { Query } from 'react-apollo';
-import { findAirportsQuery } from '../../gql/testQueries';
 import { LoadingIndicator } from '../../components/LoadingIndicator';
-import containerStyles from '../Container/styles';
 
-interface IListProps {
-  query?: string;
-  variables?: string[];
-  variable?: string;
-  stuff?: string;
-  returnDataType: string;
+interface IQueryListProps {
+  query: any; // documentNode??
+  propToUseAsListKey?: string; // a property of the expected query result to use as a list key, otherwise defaults to item index
+  returnDataType: string; // what type of data is the query returning?
+  renderResult: Function;
+  variables?: any;
 }
 
-// a component that takes a query, and renders as a list
-export default class QueryList extends React.Component<IListProps, any> {
-  constructor(props: IListProps) {
+export default class QueryList extends React.Component<IQueryListProps, any> {
+  constructor(props: IQueryListProps) {
     super(props);
   }
 
   render() {
-    if (!this.props.variable.length) {
-      return (
-        <Text>NOTHING THERE</Text>
-      );
-    }
     return (
-      <Query query={findAirportsQuery} variables={{search: this.props.variable}}>
+      <Query query={this.props.query} variables={this.props.variables}>
         {({ loading, error, data }) => {
           if (loading) return <LoadingIndicator />;
           if (error) return <Text>Error...</Text>;
           data = data[this.props.returnDataType];
-          // todo: give this keys...but obj seems immutable?
-          // let r = xx.map((item: any, idx: number) => {
-          //   item.key = idx;
-          //   return item;
-          // });
 
           return (
             <FlatList
               data={data}
-              renderItem={(obj: any) => {
-                return <Text style={containerStyles.text}>{ obj.item.airportname }</Text>;
-              }}
+              renderItem={(obj: any) => this.props.renderResult(obj.item)}
+              keyExtractor={(item: any, idx: number) => this.props.propToUseAsListKey ? item[this.props.propToUseAsListKey] : idx.toString()}
             />
           );
         }}
       </Query>
     );
   }
-
 }

@@ -19,16 +19,3 @@ export const query2 = gql`
     }
   }
 `;
-
-export const findAirportsQuery = gql`
-  query($search:String!) {
-    findAllAirports(cityOrIcaoOrFaa: $search) {
-      ... on Airport{
-        airportname
-        country
-        faa
-        icao
-      }
-    }
-  }
-`;
