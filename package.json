@@ -28,7 +28,8 @@
     "android": "react-native-scripts android",
     "android-watch": "concurrently \"yarn run watch\" \"yarn run android\"",
     "ios": "react-native-scripts ios",
-    "test": "jest --watch",
+    "test": "jest",
+    "testw": "jest --watch",
     "lint": "tslint src/**/*.ts",
     "tsc": "tsc",
     "clean": "rimraf build",
@@ -38,7 +39,7 @@
     "bs": "yarn run build && yarn run watchAndStart "
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native"
   },
   "dependencies": {
     "@types/color": "^3.0.0",

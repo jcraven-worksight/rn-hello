@@ -8,39 +8,9 @@ interface IInputWithButtonProps {
   buttonText: string,
   editable?: boolean,
   textColor?: color,
-  onChangeText?: any
+  onChangeText?: any,
+  defaultValue?: string
 }
-
-// const InputWithButton = (props: IInputWithButtonProps) => {
-//   const underlayColor = color(styles.$buttonBackgroundColorBase).darken(
-//     styles.$buttonBackgroundColorModifier
-//   );
-
-//   const containerStyles = [styles.container];
-//   if (props.editable === false) {
-//     containerStyles.push(styles.containerDisabled);
-//   }
-
-//   const buttonTextStyles = [styles.buttonText];
-//   if (props.textColor) {
-//     buttonTextStyles.push({ color: props.textColor });
-//   }
-
-//   return (
-//     <View style={containerStyles}>
-//       <TouchableHighlight
-//         onPress={props.onPress}
-//         style={styles.buttonContainer}
-//         underlayColor={underlayColor.toString()}
-//       >
-//         <Text style={buttonTextStyles}>{props.buttonText}</Text>
-//       </TouchableHighlight>
-//       <View style={styles.separator} />
-//       <TextInput style={styles.input} underlineColorAndroid='transparent' {...props} />
-//     </View>
-//   );
-// };
-// export default InputWithButton;
 
 export default class InputWithButton extends React.Component<IInputWithButtonProps, any> {
 
@@ -50,7 +20,8 @@ export default class InputWithButton extends React.Component<IInputWithButtonPro
   }
 
   handleTextInputChange = (val: string) => {
-    this.setState({text: val});
+    // this.setState({text: val});
+    this.props.onPress(val);
   }
 
   handleButtonPress = () => {
@@ -80,7 +51,12 @@ export default class InputWithButton extends React.Component<IInputWithButtonPro
         <Text style={buttonTextStyles}>{this.props.buttonText}</Text>
         </TouchableHighlight>
         <View style={styles.separator} />
-        <TextInput style={styles.input} underlineColorAndroid='transparent' {...this.props} onChangeText={this.handleTextInputChange.bind(self)}/>
+        <TextInput
+          {...this.props}
+          defaultValue={this.props.defaultValue}
+          style={styles.input}
+          underlineColorAndroid='transparent'
+          onChangeText={this.handleTextInputChange.bind(self)}/>
       </View>
     );
 

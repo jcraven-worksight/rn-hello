@@ -37,12 +37,17 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * console logging to terminal, run `react-native log-android | grep ReactNativeJS`.
 * can right click in emulator with `ctrl+m` and launch external debugger.
 * haven't been able to get the vscode debugger attaching
+* [fix for annoying issue with /tmp running out of space in android studio](https://stackoverflow.com/questions/38057884/tmp-directory-in-linux-android-sdk) look at the symlink fix
 
-### Issues/Considerations
-* __react-native__ doesn't support proxies in android, and rewire-core uses them. 
+### Issues
+__outdated javascript-core for android__
+* react-native doesn't support proxies in android, and rewire-core uses them. 
 There is a polyfill available `proxy-polyfill`. When debugging remotely you don't see this issue because the code is executed in development machine's Chrome V8, but when not debugging it executes in JavaScriptCore on the device itself [more info](https://stackoverflow.com/questions/41874676/react-native-code-doesnt-work-without-remote-debugger-enabled)
 * have tried implementing the proxy polyfill in my fork of rewire-core, but no luck.
-* __react-navigation:__ doesn't support [dynamic routing](https://reactnavigation.org/docs/en/limitations.html).
+* there is also [this](https://github.com/react-community/jsc-android-buildscripts), which is silently failing on my linux machine. It is setup to run in OSX, but running `npm run start` isn't yielding anything in /build. I've tried running the scripts individually from the /scripts folder. Maybe if I get an OSX machine I could get this running the latest JSC for Android, which would enable usage of rewire-core.
+
+__navigation__
+* react-navigation: doesn't support [dynamic routing](https://reactnavigation.org/docs/en/limitations.html).
    * unable to get get header titles displaying 
 * debounce?
 

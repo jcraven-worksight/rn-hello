@@ -10,5 +10,14 @@ export default EStyleSheet.create({
   text: {
     color: '$white',
     fontSize: 15
+  },
+  textError: {
+    color: '$primaryOrange',
+    fontSize: 18,
+    fontWeight: '300'
+  },
+  itemSeparator: {
+    backgroundColor: '$darkText',
+    height: 5
   }
 });
