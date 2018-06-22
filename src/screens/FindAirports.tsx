@@ -1,14 +1,19 @@
+/*
+  will break if not running in debug!
+  proxy issue
+*/
 import React from 'react';
 import INavigationProps from '../config/INavigationProps';
 import gql from 'graphql-tag';
-import { IAirportJSON } from '../models/Airport';
+import { IAirportJSON, Airport } from '../models/Airport';
 
 import { Container } from '../components/Container';
-import { QueryList } from '../components/QueryList';
-import { InputWithButton } from '../components/TextInput';
+import { QueryableFlatList } from '../components/QueryableFlatList';
+import { InputWithButton } from '../components/InputWithButton';
 import { TouchableListItem } from '../components/TouchableListItem';
+// import {Observe, observable, watch} from 'rewire-core';
 
-interface IFindProps extends INavigationProps /*airportinterface*/ {
+interface IFindProps extends INavigationProps {
 }
 
 const findAirportsQuery = gql`
@@ -28,10 +33,13 @@ const findAirportsQuery = gql`
 
 export default class FindAirport extends React.Component<IFindProps, any> {
   defaultCitySearch: string;
+  airports: Airport[];
   constructor(props: any) {
     super(props);
     this.defaultCitySearch = 'Seattle';
     this.state = {search: this.defaultCitySearch, results: undefined };
+    this.airports = [];
+    // this.airports = observable([]);
   }
 
   handleChangeSearch = (text: string) => {
@@ -39,18 +47,19 @@ export default class FindAirport extends React.Component<IFindProps, any> {
   }
 
   handleReceiveData = (data: any) => {
-    // this.setState({results: data}); // repeadedly calling setstate while rendering something else
+    // this.airports = data;
   }
 
-  // tslint:disable-next-line:no-empty
-  handleAirportTouch = (text: string) => {
+  handleAirportTouch = (id: any) => {
+    const airport = this.airports.find(ap => ap.id === id);
+    console.log(airport);
   }
 
   render() {
     return (
       <Container>
         <InputWithButton onPress={this.handleChangeSearch} buttonText='search airport' defaultValue={this.defaultCitySearch} />
-        <QueryList
+        <QueryableFlatList
           skip={!this.state.search.length}
           propToUseAsListKey='id'
           query={findAirportsQuery}
@@ -58,7 +67,7 @@ export default class FindAirport extends React.Component<IFindProps, any> {
           returnDataType='findAllAirports'
           onReceiveData={this.handleReceiveData}
           renderResult={(obj: IAirportJSON) => (
-            <TouchableListItem displayText={obj.airportname} onTouch={this.handleAirportTouch} />
+            <TouchableListItem displayText={obj.airportname} onTouch={this.handleAirportTouch} idx={obj.id} />
           )}
         />
       </Container>

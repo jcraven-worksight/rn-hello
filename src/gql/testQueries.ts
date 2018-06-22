@@ -1,4 +1,6 @@
 import gql from 'graphql-tag';
+import { client } from '../App';
+import { Airport } from '../models/Airport';
 
 export const query1 = gql`
   query($type:String!, $numOfAirports: Int!) {
@@ -33,3 +35,10 @@ export const findAirportsQuery = gql`
     }
   }
 `;
+
+export const testAirportFetch = async (): Promise<Airport[]> => {
+  return client.query({ query: findAirportsQuery, variables: { search: 'Seattle' } }).then(result => {
+    const data: any = result.data;
+    return data.findAllAirports;
+  });
+};

@@ -1,9 +1,8 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import { Query } from 'react-apollo';
-import { LoadingIndicator } from '../../components/LoadingIndicator';
 import containerStyles from '../Container/styles';
 import {uniq} from 'lodash';
+import { GqlQuery } from '../Query';
 
 interface IQueryListProps {
   query: any; // documentNode??
@@ -15,19 +14,20 @@ interface IQueryListProps {
   onReceiveData?: Function;
 }
 
-export default class QueryList extends React.Component<IQueryListProps, any> {
+export default class QueryableFlatList extends React.Component<IQueryListProps, any> {
   constructor(props: IQueryListProps) {
     super(props);
   }
 
   render() {
     return (
-      <Query query={this.props.query} variables={this.props.variables} skip={this.props.skip}>
-        {({ loading, error, data }) => {
-          if (loading) return <LoadingIndicator />;
-          if (error) return <Text style={containerStyles.textError}>{error.message}</Text>;
-          data = data[this.props.returnDataType];
-          this.props.onReceiveData(data);
+      <GqlQuery
+        query={this.props.query}
+        variables={this.props.variables}
+        skip={this.props.skip}
+        expectedResultType={this.props.returnDataType}
+        onReceiveData={this.props.onReceiveData}
+        children={(data: any) => {
           return (
             <View style={{ width: '90%' }}>
               <FlatList
@@ -39,7 +39,7 @@ export default class QueryList extends React.Component<IQueryListProps, any> {
             </View>
           );
         }}
-      </Query>
+      />
     );
   }
 }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput } from 'react-native';
 import INavigationProps from '../config/INavigationProps';
-import { client } from '../App';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { query1, findAirportsQuery } from '../gql/testQueries';
 import { Container } from '../components/Container';
 import { NiceButton } from '../components/Button';
 
@@ -24,30 +22,17 @@ export default class LoginScreen extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.focusNextField = this.focusNextField.bind(this);
     this.inputs = {};
     this.state = {
       email: props.email || 'temp@temp.temp',
       password: props.password || 'p',
       title: 'hello, login here'
     };
-    // this.testQuery();
   }
 
-  testQuery() {
-    // client.query({ query: query1, variables: {type: 'airport', numOfAirports: 3}}).then(result => {
-    client.query({ query: findAirportsQuery, variables: {search: 'Seattle'}}).then(result => {
-      const data: any = result.data;
-      const aps = data.searchType;
-      console.log(aps[0]);
-    });
-  }
+  focusNextField = (id: string) =>  this.inputs[id].focus();
 
-  focusNextField(id: string) {
-    this.inputs[id].focus();
-  }
-
-  login() {
+  login = () => {
     if (this.state.password === 'p') {
       this.props.navigation.navigate('Home', { email: this.state.email, name: 'bob man', job: 'carpenter' });
     } else {
@@ -62,7 +47,6 @@ export default class LoginScreen extends Component<Props, State> {
         <TextInput
           style={styles.input}
           onChangeText={(email) => this.setState({email})}
-          // value={this.state.text}
           placeholder='email'
           autoFocus={false}
           keyboardType='email-address'
@@ -78,13 +62,12 @@ export default class LoginScreen extends Component<Props, State> {
         <TextInput
           style={styles.input}
           onChangeText={(password) => this.setState({password})}
-          // value={this.state.text}
           placeholder='password'
           ref={ input => {
             this.inputs.two = input;
           }}
         />
-          <NiceButton onTouch={this.login.bind(this)} title='Login' />
+          <NiceButton onTouch={this.login} title='Login' />
       </Container>
     );
   }
@@ -100,8 +83,9 @@ const styles = EStyleSheet.create({
     height: 40,
     width: 200,
     borderWidth: 1,
-    borderColor: '$inputText',
+    borderColor: '$white',
     marginHorizontal: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: '$white'
   }
 });

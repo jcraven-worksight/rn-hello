@@ -56,7 +56,7 @@ export default class InputWithButton extends React.Component<IInputWithButtonPro
           defaultValue={this.props.defaultValue}
           style={styles.input}
           underlineColorAndroid='transparent'
-          onChangeText={this.handleTextInputChange.bind(self)}/>
+          onChangeText={this.handleTextInputChange}/>
       </View>
     );
 

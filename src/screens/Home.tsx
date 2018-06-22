@@ -29,7 +29,11 @@ export default class Home extends React.Component<IHomeProps, any> {
           <Text style={styles.text}>email: {this.employee.email}</Text>
           <Text style={styles.text}>job: {this.employee.job}</Text>
           <Text/>
-          <NiceButton title='Go Somewhere Else' onTouch={() => navigate('Empty', {})}/>
+          <NiceButton title='Go to empty' onTouch={() => navigate('Empty', {})}/>
+          <Text/>
+          <NiceButton title='Go to flex' onTouch={() => navigate('Flex', {})}/>
+          <Text/>
+          <NiceButton title='Go to findairport' onTouch={() => navigate('FindAirport', {})}/>
         </Container>
     );
   }

@@ -25,6 +25,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * if working correctly, you should see this line in the debug console if vscode attached: Debugger worker loaded runtime on port x
 * if db is running locally, specify machine ip
 * if you start seeing error messages about not being able to find files, reinstall react-native tools
+* if you see error about `unable to resolve module, indeed none of these files exist`, need to restart the packager. If debugging in vscode, simply restarting the debugger doesn't seem to fix this. need to restart Vscode. 
 
 ### android emulator
 * install android studio

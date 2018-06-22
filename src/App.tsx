@@ -1,8 +1,11 @@
 import React from 'react';
+
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Empty from './screens/Empty';
+import Flex from './screens/HowToFlex';
 import FindAirport from './screens/FindAirports';
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { merge } from 'lodash';
@@ -29,28 +32,20 @@ EStyleSheet.build({
 });
 
 const MainScreens = {
-  FindAirport: {
-    screen: (props: any) => <FindAirport {...props} />
-  },
-  Empty: {
-    screen: (props: any) => <Empty {...props} />
-    // screen: Object.assign(Empty, navigationOptions)
-  },
-  Home: {
-    screen: (props: any) => <Home {...props} />
-  }
+  Flex: { screen: (props: any) => <Flex {...props} /> },
+  FindAirport: { screen: (props: any) => <FindAirport {...props} /> },
+  Empty: { screen: (props: any) => <Empty {...props} /> },
+  Home: { screen: (props: any) => <Home {...props} /> }
 };
 
 const LoginScreens = {
-  Login: {
-    screen: (props: any) => <Login {...props} />
-  }
+  Login: { screen: (props: any) => <Login {...props} /> }
 };
 
 const RootStackNavigator = createStackNavigator(
   merge(LoginScreens, MainScreens),
   {
-    // initialRouteName: 'Login'
+    // initialRouteName: 'Flex'
     initialRouteName: 'FindAirport'
   }
 );

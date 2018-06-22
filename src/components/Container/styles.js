@@ -5,7 +5,7 @@ export default EStyleSheet.create({
     flex: 1,
     backgroundColor: '$darkText',
     alignItems: 'center',
-    justifyContent: 'center'
+    // justifyContent: 'center' // in RN -
   },
   text: {
     color: '$white',
