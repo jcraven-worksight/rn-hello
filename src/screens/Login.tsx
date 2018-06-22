@@ -42,7 +42,7 @@ export default class LoginScreen extends Component<Props, State> {
 
   render() {
     return (
-      <Container>
+      <Container hide={false}>
         <Text style={[styles.text, {marginBottom: 15}]}>{this.state.title}</Text>
         <TextInput
           style={styles.input}
@@ -52,12 +52,8 @@ export default class LoginScreen extends Component<Props, State> {
           keyboardType='email-address'
           blurOnSubmit={false}
           returnKeyType={'next'}
-          ref={ input => {
-            this.inputs.one = input;
-          }}
-          onSubmitEditing={() => {
-            this.focusNextField('two');
-          }}
+          ref={input => this.inputs.one = input}
+          onSubmitEditing={() => this.focusNextField('two')}
         />
         <TextInput
           style={styles.input}

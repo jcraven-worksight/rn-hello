@@ -45,7 +45,7 @@ const LoginScreens = {
 const RootStackNavigator = createStackNavigator(
   merge(LoginScreens, MainScreens),
   {
-    // initialRouteName: 'Flex'
+    // initialRouteName: 'Login'
     initialRouteName: 'FindAirport'
   }
 );
